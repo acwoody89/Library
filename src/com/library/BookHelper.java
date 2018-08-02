@@ -38,7 +38,7 @@ public class BookHelper {
 			
 			
 			while (lineRead != null) {
-				prompt = lineRead.split("|");
+				prompt = lineRead.split(","); //??????
 								
 				if (prompt[3].equalsIgnoreCase("false")) {
 			status = false;
@@ -47,13 +47,26 @@ public class BookHelper {
 					status = true;
 				}
 				
-				Book display = new Book(prompt[0],prompt[1],prompt[2],false,prompt[4]);
+				Book display = new Book(prompt[0],prompt[1],prompt[2],status,prompt[4]);
 				bList.add(display);
 				
 				
-//				System.out.println(lineRead);
+				//System.out.println(lineRead);
+				
 				lineRead = reader.readLine(); // this will read the next line
 			}
+			
+			//for each 
+			for (int i =0; i < bList.size();i++) {
+				System.out.println(bList.get(i));
+			}
+				
+			
+			
+			
+			
+			
+			
 			reader.close();
 
 			} catch (FileNotFoundException e) {
