@@ -1,0 +1,13 @@
+Twilight|Meyer|Stephenie|true|8-16-2018
+Vampire Academy|Richelle|Mead|true|8-16-2018
+The Last Song|Sparks|Nicholas|true|8-16-2018
+The Great Gatsby|Fitzgerald|F. Scott|true|8-16-2018
+The Amazing Adventures of Kavalier & Clay|Chabon|Michael|true|8-16-2018
+The Fortress of Solitude|Lethem|Jonathan|true|8-16-2018
+Cloud Atlas|Mitchell|David|true|8-16-2018
+The Remains of the Day|Ishiguro|Kazuo|true|8-16-2018
+Lirael|Nix|Garth|true|8-16-2018
+Changes|Butcher|Jim|true|8-16-2018
+Forging Hephaestus|Hayes|Drew|true|8-16-2018
+Dungeon Born|Krout|Dakota|true|8-16-2018
+Nice Dragons Finish Last|Aaron|Rachael|true|8-16-2018
