@@ -160,6 +160,7 @@ public class BookApp {
 				String newAuthorFirst = Validator.getString(scan, "Please enter the author's first name:");
 				Book addBook = new Book(newTitle, newAuthorLast, newAuthorFirst, true, "N/A");
 				boolean copyFound = false;
+				System.out.println(newTitle);
 				for (Book b : bookList) {
 					
 					if (addBook.getTitle().equalsIgnoreCase(b.getTitle())) {
