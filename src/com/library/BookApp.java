@@ -39,9 +39,12 @@ public class BookApp {
 			} else if (inputNum == 5) {
 				sortMenu(bookList, scan);
 			} else if (inputNum == 6) {
+				addBook(scan, bookList);
+			} else if (inputNum == 7) {
 				System.out.println("You are leaving the lie-brary of Three Laptops and A Mouse");
+				//BookHelper.writeToFiles(bookList);
 			}
-		} while (!(inputNum == 6));
+		} while (!(inputNum == 7));
 	}
 
 	// public static void searchByTitle(ArrayList<Book> sortList, Scanner scan) {
@@ -61,8 +64,9 @@ public class BookApp {
 			System.out.println("2 - Sort By...Title");
 			System.out.println("3 - Sort By...Status");
 			System.out.println("4 - Sort By...Due Date");
-			System.out.println("5 - Exit");
-			inputNum = Validator.getInt(scan, "Please choose!", 1, 5);
+			System.out.println("5 - Add a new book (librarians only)");
+			System.out.println("6 - Exit");
+			inputNum = Validator.getInt(scan, "Please choose!", 1, 6);
 
 			if (inputNum == 1) {
 				sortByLastName(sortList);
@@ -76,9 +80,9 @@ public class BookApp {
 			} else if (inputNum == 4) {
 				sortByDueDate(sortList);
 				output = "Sorting by Due Date";
-			}
-			printMenu(sortList);
-		} while (!(inputNum == 5));
+			} else if (inputNum == 5)
+				printMenu(sortList);
+		} while (!(inputNum == 6));
 		System.out.println(output);
 	}
 
@@ -144,6 +148,36 @@ public class BookApp {
 		LocalDate returnDate = checkOut.plusWeeks(2);
 
 		return returnDate;
+	}
+
+	public static void addBook(Scanner scan, ArrayList<Book> bookList) {
+		int inputNum = 1;
+		inputNum = Validator.getInt(scan, "Would you like to add a book?\n 1. yes\n2. no", 1, 2);
+		do {
+			if (inputNum == 1) {
+				String newTitle = Validator.getString(scan, "Please enter a title:");
+				String newAuthorLast = Validator.getString(scan, "Please the author's last name:");
+				String newAuthorFirst = Validator.getString(scan, "Please enter the author's first name:");
+				Book addBook = new Book(newTitle, newAuthorLast, newAuthorFirst, true, "N/A");
+				boolean copyFound = false;
+				for (Book b : bookList) {
+					
+					if (addBook.getTitle().equalsIgnoreCase(b.getTitle())) {
+						copyFound = true;
+					}
+				}
+				if (copyFound == false) {
+					bookList.add(addBook);
+				} else {
+					System.out.println("That book already exists!");
+				}
+				// BookHelper.writeToFiles(bookList);
+				inputNum = Validator.getInt(scan, "Add another book? 1. yes\n 2. no", 1, 2);
+				
+			} else {
+			}
+		} while (inputNum == 1);
+
 	}
 
 	public static void printMenu(ArrayList<Book> sortList) {
@@ -218,7 +252,7 @@ public class BookApp {
 
 			int count = 1;
 			for (Book b : sortList) {
-				if ((b.getAuthorLast().toLowerCase().contains(input)) 
+				if ((b.getAuthorLast().toLowerCase().contains(input))
 						|| (b.getAuthorFirst().toLowerCase().contains(input))) {
 					searchBook.add(b);
 				}
@@ -251,7 +285,8 @@ public class BookApp {
 		System.out.println("3 - Select Book");
 		System.out.println("4 - Return Book");
 		System.out.println("5 - Sort Menu");
-		System.out.println("6 - Exit");
+		System.out.println("6 - Add Book");
+		System.out.println("7 - Exit");
 	}
 
 	public static void sortByTitle(ArrayList<Book> sortList) {
