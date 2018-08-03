@@ -26,16 +26,16 @@ public class BookApp {
 		do {
 			printMenu(bookList);
 			printOptions();
-			inputNum = Validator.getInt(scan, "Please choose!", 1, 5);
+			inputNum = Validator.getInt(scan, "Please choose!\n", 1, 6);
 
 			if (inputNum == 1) {
-
+				authorSearch(bookList, scan);
 			} else if (inputNum == 2) {
-
+				titleSearch(bookList, scan);
 			} else if (inputNum == 3) {
 				checkOutBook(bookList, selectBook(bookList, scan), scan);
 			} else if (inputNum == 4) {
-
+				returnBook(bookList, scan);
 			} else if (inputNum == 5) {
 				sortMenu(bookList, scan);
 			} else if (inputNum == 6) {
@@ -43,6 +43,15 @@ public class BookApp {
 			}
 		} while (!(inputNum == 6));
 	}
+
+	// public static void searchByTitle(ArrayList<Book> sortList, Scanner scan) {
+	//
+	// for (Book b : sortList) {
+	// if (b.getTitle().toLowerCase().contains(input)) {
+	// printSearchMenu(sortList);
+	// }
+	// }
+	// }
 
 	public static void sortMenu(ArrayList<Book> sortList, Scanner scan) {
 		String output = "";
@@ -75,7 +84,19 @@ public class BookApp {
 
 	public static void returnBook(ArrayList<Book> sortList, Scanner scan) {
 		System.out.println("Are you returning a book?");
-		int checkoutBook = Validator.getInt(scan, "(1) Yes \n (2) No", 1, 2);
+		int inputNum = Validator.getInt(scan, "(1) Yes \n (2) No", 1, 2);
+		boolean checkStatus = true;
+		for (Book b : sortList) {
+			if (b.isStatus() == false) {
+				checkStatus = false;
+			}
+		}
+		if (inputNum == 1 && checkStatus == false) {
+			printReturnMenu(sortList);
+		} else {
+			System.out.println("There are no books to return. Taking you back to main menu.");
+		}
+
 	}
 
 	public static int selectBook(ArrayList<Book> sortList, Scanner scan) {
@@ -98,10 +119,12 @@ public class BookApp {
 						sortList.get(i).setStatus(false);
 						date = addTwoWeeks(checkOut).toString();
 						sortList.get(i).setDueDate(date);
-						System.out.println("You have checked out");
+						System.out.println("You have checked out " + sortList.get(i).getTitle());
 					}
 				}
 			}
+		} else if (checkoutBook == 2) {
+			System.out.println("Restarting search...");
 		} else {
 			System.out.println("That book is already checked out. Selc");
 		}
@@ -135,6 +158,90 @@ public class BookApp {
 		}
 		System.out.println("****************************************");
 
+	}
+
+	public static void printReturnMenu(ArrayList<Book> sortList) {
+		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "Option", "Title", "Author", "Status", "Due Date");
+		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "*******", "*******", "*******", "*******", "*******");
+		int count = 1;
+		for (Book b : sortList) {
+			if (b.isStatus() == false) {
+				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "(" + count + ")", b.getTitle(),
+						b.getAuthorLast() + ", " + b.getAuthorFirst(), statusToString(b.isStatus()), b.getDueDate());
+				count++;
+			}
+		}
+		System.out.println("****************************************");
+
+	}
+
+	public static void titleSearch(ArrayList<Book> sortList, Scanner scan) {
+		int inputNum = 0;
+		do {
+			String input = Validator.getString(scan, "Enter a search term: ").toLowerCase();
+			ArrayList<Book> searchBook = new ArrayList<>();
+
+			int count = 1;
+			for (Book b : sortList) {
+				if ((b.getTitle().toLowerCase().contains(input))) {
+					searchBook.add(b);
+
+				}
+
+			}
+
+			if (searchBook.size() > 0) {
+				System.out.println("Here are matches to the term " + input + ":");
+				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "Option", "Title", "Author", "Status", "Due Date");
+				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "*******", "*******", "*******", "*******",
+						"*******");
+				for (Book b : searchBook) {
+					System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "(" + count + ")", b.getTitle(),
+							b.getAuthorLast() + ", " + b.getAuthorFirst(), statusToString(b.isStatus()),
+							b.getDueDate());
+					count++;
+				}
+				checkOutBook(searchBook, selectBook(searchBook, scan), scan);
+			} else {
+				System.out.println("Sorry, search conditions not found! Try Again!");
+			}
+
+			inputNum = (Validator.getInt(scan, "Please choose 1 to search or 2 to exit:", 1, 2));
+		} while (inputNum == 1);
+	}
+
+	public static void authorSearch(ArrayList<Book> sortList, Scanner scan) {
+		int inputNum = 0;
+		do {
+			String input = Validator.getString(scan, "Enter a search term: ").toLowerCase();
+			ArrayList<Book> searchBook = new ArrayList<>();
+
+			int count = 1;
+			for (Book b : sortList) {
+				if ((b.getAuthorLast().toLowerCase().contains(input)) 
+						|| (b.getAuthorFirst().toLowerCase().contains(input))) {
+					searchBook.add(b);
+				}
+			}
+
+			if (searchBook.size() > 0) {
+				System.out.println("Here are matches to the term " + input + ":");
+				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "Option", "Title", "Author", "Status", "Due Date");
+				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "*******", "*******", "*******", "*******",
+						"*******");
+				for (Book b : searchBook) {
+					System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "(" + count + ")", b.getTitle(),
+							b.getAuthorLast() + ", " + b.getAuthorFirst(), statusToString(b.isStatus()),
+							b.getDueDate());
+					count++;
+				}
+				checkOutBook(searchBook, selectBook(sortList, scan), scan);
+			} else {
+				System.out.println("Sorry, search conditions not found! Try Again!");
+			}
+
+			inputNum = (Validator.getInt(scan, "Please choose 1 to search or 2 to exit:", 1, 2));
+		} while (inputNum == 1);
 	}
 
 	public static void printOptions() {
