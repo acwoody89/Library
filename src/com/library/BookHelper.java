@@ -93,6 +93,28 @@ public class BookHelper {
 			
 		}
 		
+		public static void writeToFiles(ArrayList<Book> bookList) { //overloaded method reads from BookApp
+			String fileName = "booklist.txt";
+			Path writeFile = Paths.get(fileName);
+			File file = writeFile.toFile();
+			
+			try {
+				PrintWriter outW = new PrintWriter(new FileOutputStream(file)) ; 
+				//no "true", it will overwrite the entire txt file each time
+				for (Book b : bookList) {
+					outW.println(b.getTitle() + "," + b.getAuthorLast() + "," 
+							+ b.getAuthorFirst() + "," + b.isStatus() + "," + b.getDueDate());
+				}
+				
+				outW.close();
+			
+			} catch (FileNotFoundException e) {
+				System.out.println("File not found.");
+			}
+			
+			
+		}
+		
 		public static void createFile() { //this is to create a new file if it's not created yet
 			String fileName = "booklist.txt";
 			Path createFile = Paths.get(fileName);

@@ -114,7 +114,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return title + "|" + authorLast + "," + authorFirst + "|" + status + "|" + dueDate;
+		return title + "," + authorLast + "," + authorFirst + "," + status + "," + dueDate;
 	}
 
 }
