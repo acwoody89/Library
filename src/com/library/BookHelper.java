@@ -55,11 +55,6 @@ public class BookHelper {
 				
 				lineRead = reader.readLine(); // this will read the next line
 			}
-			
-			//for each 
-			for (int i =0; i < bList.size();i++) {
-				System.out.println(bList.get(i));
-			}
 				
 			
 			
