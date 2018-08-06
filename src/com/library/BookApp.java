@@ -11,6 +11,11 @@ import java.util.Scanner;
 
 public class BookApp {
 
+	/**
+	 * 
+	 * @param main method prints the contents of the library and presents the user with a
+	 * menu of options.
+	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		ArrayList<Book> bookList = new ArrayList<>();
@@ -28,7 +33,7 @@ public class BookApp {
 			} else if (inputNum == 2) {
 				titleSearch(bookList, scan);
 			} else if (inputNum == 3) {
-				checkOutBook(bookList, selectBook(bookList, scan), scan);
+				checkOutBook(bookList, selectBook(bookList, scan), scan); // FIXME
 			} else if (inputNum == 4) {
 				returnBook(bookList, scan);
 			} else if (inputNum == 5) {
@@ -42,17 +47,21 @@ public class BookApp {
 		} while (!(inputNum == 7));
 	}
 
+	/**
+	 * 
+	 * @param sortMenu -- This generates a menu that sorts the contents of the library
+	 * by user-selected criteria.
+	 */
 	public static void sortMenu(ArrayList<Book> sortList, Scanner scan) {
 		String output = "";
 		int inputNum = 0;
 		do {
-			System.out.println("1 - Sort By...Last Name");
-			System.out.println("2 - Sort By...Title");
-			System.out.println("3 - Sort By...Status");
-			System.out.println("4 - Sort By...Due Date");
-			System.out.println("5 - Add a new book (librarians only)");
-			System.out.println("6 - Exit");
-			inputNum = Validator.getInt(scan, "Please choose!", 1, 6);
+			System.out.println("1 - Sort By Author's Last Name");
+			System.out.println("2 - Sort By Book Title");
+			System.out.println("3 - Sort By Shelf Status");
+			System.out.println("4 - Sort By Due Date");
+			System.out.println("5 - Exit");
+			inputNum = Validator.getInt(scan, "Please choose!", 1, 5);
 
 			if (inputNum == 1) {
 				sortByLastName(sortList);
@@ -68,10 +77,15 @@ public class BookApp {
 				output = "Sorting by Due Date";
 			} else if (inputNum == 5)
 				printMenu(sortList);
-		} while (!(inputNum == 6));
+		} while (!(inputNum == 5));
 		System.out.println(output);
 	}
 
+	/**
+	 * 
+	 * @param returnBook -- This method allows a user to return a book, as long as its
+	 * status is "Checked Out." It returns the book's status to "On Shelf."
+	 */
 	public static void returnBook(ArrayList<Book> sortList, Scanner scan) {
 		System.out.println("Are you returning a book?");
 		int inputNum = Validator.getInt(scan, "(1) Yes \n (2) No", 1, 2);
@@ -89,12 +103,24 @@ public class BookApp {
 
 	}
 
+	/**
+	 * 
+	 * @param selectBook -- This method lets the user choose between books returned in
+	 * search results.
+	 * @return The input number corresponding to the chosen book
+	 */
 	public static int selectBook(ArrayList<Book> sortList, Scanner scan) {
 		int inputNum = Validator.getInt(scan,
 				"What book would you like to select? \n" + "Select by option number.", 1, sortList.size());
 		return inputNum;
 	}
 
+	/**
+	 * 
+	 * @param checkOutBook -- This method takes a user-selected title, confirms that the
+	 * user would like to check out the book, assigns a due date, and changes the book's status
+	 * from "On Shelf" to "Checked Out."
+	 */
 	public static void checkOutBook(ArrayList<Book> sortList, int input, Scanner scan) {
 		System.out.println("Would you like to check out this book?");
 		int checkoutBook = Validator.getInt(scan, "(1) Yes \n(2) No", 1, 2);
@@ -120,6 +146,12 @@ public class BookApp {
 		}
 	}
 
+	/**
+	 * 
+	 * @param statusToString -- This method converts the boolean status to the appropriate
+	 * String.
+	 * @return Returns either "On Shelf" or "Checked Out."
+	 */
 	public static String statusToString(boolean pStatus) {
 		String status = null;
 		if (pStatus == true) {
@@ -130,12 +162,23 @@ public class BookApp {
 		return status;
 	}
 
+	/**
+	 * 
+	 * @param addTwoWeeks -- This method generates due dates by adding two weeks to
+	 * today's date.
+	 * @return the due date is returned.
+	 */
 	public static LocalDate addTwoWeeks(LocalDate checkOut) {
 		LocalDate returnDate = checkOut.plusWeeks(2);
 
 		return returnDate;
 	}
 
+	/**
+	 * 
+	 * @param addBook -- This method adds new books to the library and writes them
+	 * to the booklist text file.
+	 */
 	public static void addBook(Scanner scan, ArrayList<Book> bookList) {
 		int inputNum = 1;
 		inputNum = Validator.getInt(scan, "Would you like to add a book?\n 1. yes\n2. no", 1, 2);
@@ -167,6 +210,10 @@ public class BookApp {
 
 	}
 
+	/**
+	 * 
+	 * @param printMenu -- This method prints a list of all books in the library.
+	 */
 	public static void printMenu(ArrayList<Book> sortList) {
 		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "Option", "Title", "Author", "Status", "Due Date");
 		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "*******", "*******", "*******", "*******", "*******");
@@ -180,7 +227,12 @@ public class BookApp {
 		System.out.println("****************************************");
 
 	}
-
+	
+	/**
+	 *
+	 * @param printReturnMenu -- This method prints the sorted list refined by user-input
+	 * search terms.
+	 */
 	public static void printReturnMenu(ArrayList<Book> sortList) {
 		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "Option", "Title", "Author", "Status", "Due Date");
 		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "*******", "*******", "*******", "*******", "*******");
@@ -242,7 +294,7 @@ public class BookApp {
 	public static void authorSearch(ArrayList<Book> sortList, Scanner scan) {
 		int inputNum = 0;
 		do {
-			String input = Validator.getString(scan, "Enter a search term: ").toLowerCase();
+			String input = Validator.getString(scan, "Enter an author's first OR last name: ").toLowerCase();
 			ArrayList<Book> searchBook = new ArrayList<>();
 
 			int count = 1;
@@ -264,7 +316,7 @@ public class BookApp {
 							b.getDueDate());
 					count++;
 				}
-				checkOutBook(searchBook, selectBook(sortList, scan), scan);
+				checkOutBook(searchBook, selectBook(searchBook, scan), scan);
 			} else {
 				System.out.println("Sorry, search conditions not found! Try Again!");
 			}
@@ -294,6 +346,8 @@ public class BookApp {
 	 */
 	public static void sortByTitle(ArrayList<Book> sortList) {
 		Collections.sort(sortList, Comparator.comparing(Book::getTitle));
+		printMenu(sortList);
+		
 	}
 
 	/**
@@ -302,6 +356,7 @@ public class BookApp {
 	 */
 	public static void sortByLastName(ArrayList<Book> sortList) {
 		Collections.sort(sortList, Comparator.comparing(Book::getAuthorLast));
+		printMenu(sortList);
 	}
 
 	/**
@@ -310,6 +365,7 @@ public class BookApp {
 	 */
 	public static void sortByStatus(ArrayList<Book> sortList) {
 		Collections.sort(sortList, Comparator.comparing(Book::isStatus));
+		printMenu(sortList);
 	}
 
 	/**
@@ -318,6 +374,7 @@ public class BookApp {
 	 */
 	public static void sortByDueDate(ArrayList<Book> sortList) {
 		Collections.sort(sortList, Comparator.comparing(Book::getDueDate));
+		printMenu(sortList);
 
 	}
 
