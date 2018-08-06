@@ -10,15 +10,6 @@ public class Book {
 	private boolean status;
 	private String dueDate;
 
-	// public Book(String title, String authorLast, String authorFirst, boolean
-	// status, String dueDate) {
-	// super();
-	// this.title = title;
-	// this.authorLast = authorLast;
-	// this.authorFirst = authorFirst;
-	// this.status = status;
-	// this.dueDate = dueDate;
-	// }
 	public Book() {
 		super();
 	}

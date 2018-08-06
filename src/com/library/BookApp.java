@@ -90,7 +90,7 @@ public class BookApp {
 	public static void returnBook(ArrayList<Book> bookList, Scanner scan) {
 		ArrayList<Book> sortList = new ArrayList<>();
 		System.out.println("Are you returning a book?");
-		int returnBook = Validator.getInt(scan, "(1) Yes \n(2) No", 1, 2);
+		int returnBook = Validator.getInt(scan, "(1) Yes \n(2) No\n", 1, 2);
 
 		if (returnBook == 1) {
 			for (Book b : bookList) {
@@ -112,8 +112,6 @@ public class BookApp {
 				}
 			}
 		}
-		
-
 	}
 
 	/**
@@ -137,7 +135,7 @@ public class BookApp {
 	 */
 	public static void checkOutBook(ArrayList<Book> sortList, int input, Scanner scan) {
 		System.out.println("Would you like to check out this book?");
-		int checkoutBook = Validator.getInt(scan, "(1) Yes \n(2) No", 1, 2);
+		int checkoutBook = Validator.getInt(scan, "(1) Yes \n(2) No\n", 1, 2);
 
 		if (checkoutBook == 1 && (sortList.get(input - 1).isStatus() == true)) {
 
@@ -184,7 +182,6 @@ public class BookApp {
 	 */
 	public static LocalDate addTwoWeeks(LocalDate checkOut) {
 		LocalDate returnDate = checkOut.plusWeeks(2);
-
 		return returnDate;
 	}
 
@@ -217,9 +214,7 @@ public class BookApp {
 				}
 				BookHelper.writeToFiles(bookList);
 				inputNum = Validator.getInt(scan, "Add another book?\n1. yes\n2. no", 1, 2);
-
-			} else {
-			}
+			} 
 		} while (inputNum == 1);
 
 	}
@@ -307,39 +302,6 @@ public class BookApp {
 	 *                     authorLast and authorFirst fields for matches, adds them
 	 *                     to an arrayList and prints to the console.
 	 */
-//	public static void authorSearch(ArrayList<Book> sortList, Scanner scan) {
-//		int inputNum = 0;
-//		do {
-//			String input = Validator.getString(scan, "Enter an author's first OR last name: ").toLowerCase();
-//			ArrayList<Book> searchBook = new ArrayList<>();
-//
-//			int count = 1;
-//			for (Book b : sortList) {
-//				if ((b.getAuthorLast().toLowerCase().contains(input))
-//						|| (b.getAuthorFirst().toLowerCase().contains(input))) {
-//					searchBook.add(b);
-//				}
-//			}
-//
-//			if (searchBook.size() > 0) {
-//				System.out.println("Here are matches to the term " + input + ":");
-//				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "Option", "Title", "Author", "Status", "Due Date");
-//				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "*******", "*******", "*******", "*******",
-//						"*******");
-//				for (Book b : searchBook) {
-//					System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "(" + count + ")", b.getTitle(),
-//							b.getAuthorLast() + ", " + b.getAuthorFirst(), statusToString(b.isStatus()),
-//							b.getDueDate());
-//					count++;
-//				}
-//				checkOutBook(searchBook, selectBook(searchBook, scan), scan);
-//			} else {
-//				System.out.println("Sorry, search conditions not found! Try Again!");
-//			}
-//
-//			inputNum = (Validator.getInt(scan, "Please choose 1 to search or 2 to exit:", 1, 2));
-//		} while (inputNum == 1);
-//	}
 	public static void authorSearch(ArrayList<Book> sortList, Scanner scan) {
 		int inputNum = 0;
 		String inputLast = "";
@@ -357,21 +319,15 @@ public class BookApp {
 				inputFirst = "\"";
 			}
 
-//			firstLast = input.split(" "); 
 			int count = 1;
 			for (Book b : sortList) {
 				if ((b.getAuthorLast().toLowerCase().contains(inputLast))
 						|| (b.getAuthorFirst().toLowerCase().contains(inputFirst))) {
 
 					searchBook.add(b);
-
 				}
 			}
 
-//				else if (b.getAuthorFirst().toLowerCase().contains(input)) {
-//					b.getAuthorLast().toLowerCase().contains(" ");
-//					searchBook.add(b);
-//			}
 
 			if (searchBook.size() > 0) {
 				System.out.println("Here are matches to the term " + inputLast + ", " + inputFirst + ":");
