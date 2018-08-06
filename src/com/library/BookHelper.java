@@ -45,9 +45,9 @@ public class BookHelper {
 				}
 				else if (prompt[3].equalsIgnoreCase("true")) {
 					status = true;
-				}
-				
+				}			
 				Book display = new Book(prompt[0],prompt[1],prompt[2],status,prompt[4]);
+				//Book display = new Book("hello", "test", "hello ", true, "duedate");
 				bList.add(display);
 				
 				
