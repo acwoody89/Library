@@ -99,8 +99,7 @@ public class BookApp {
 		int returnBook = Validator.getInt(scan, "(1) Yes \n(2) No\n", 1, 2);
 
 		
-		/**If user tried to return a book that is shown as "checked out",
-		 * book will be added to a sortlist for display.
+		/**Display all books that are currently checked out.
 		 */
 		
 		if (returnBook == 1) {
@@ -253,26 +252,6 @@ public class BookApp {
 			System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "(" + count + ")", b.getTitle(),
 					b.getAuthorLast() + ", " + b.getAuthorFirst(), statusToString(b.isStatus()), b.getDueDate());
 			count++;
-		}
-		System.out.println("****************************************");
-
-	}
-
-	/**
-	 *
-	 * @param printReturnMenu -- This method prints the sorted list refined by
-	 *                        user-input search terms.
-	 */
-	public static void printReturnMenu(ArrayList<Book> sortList) {
-		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "Option", "Title", "Author", "Status", "Due Date");
-		System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "*******", "*******", "*******", "*******", "*******");
-		int count = 1;
-		for (Book b : sortList) {
-			if (b.isStatus() == false) {
-				System.out.printf("%-10s %-50s %-35s %-20s %-35s%n", "(" + count + ")", b.getTitle(),
-						b.getAuthorLast() + ", " + b.getAuthorFirst(), statusToString(b.isStatus()), b.getDueDate());
-				count++;
-			}
 		}
 		System.out.println("****************************************");
 
