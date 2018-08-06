@@ -26,7 +26,7 @@ public class BookApp {
 		do {
 			printMenu(bookList);
 			printOptions();
-			inputNum = Validator.getInt(scan, "Please choose!\n", 1, 6);
+			inputNum = Validator.getInt(scan, "Please choose!\n", 1, 7);
 
 			if (inputNum == 1) {
 				authorSearch(bookList, scan);
@@ -46,15 +46,6 @@ public class BookApp {
 			}
 		} while (!(inputNum == 7));
 	}
-
-	// public static void searchByTitle(ArrayList<Book> sortList, Scanner scan) {
-	//
-	// for (Book b : sortList) {
-	// if (b.getTitle().toLowerCase().contains(input)) {
-	// printSearchMenu(sortList);
-	// }
-	// }
-	// }
 
 	public static void sortMenu(ArrayList<Book> sortList, Scanner scan) {
 		String output = "";
@@ -172,7 +163,7 @@ public class BookApp {
 				} else {
 					System.out.println("That book already exists!");
 				}
-				// BookHelper.writeToFiles(bookList);
+				//BookHelper.writeToFiles(bookList);
 				inputNum = Validator.getInt(scan, "Add another book? 1. yes\n 2. no", 1, 2);
 				
 			} else {
