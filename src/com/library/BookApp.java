@@ -21,11 +21,10 @@ public class BookApp {
 		ArrayList<Book> bookList = new ArrayList<>();
 		bookList = BookHelper.readFromFile("booklist.txt");
 		int inputNum = 0;
-		sortByTitle(bookList);
 
 		do {
-			//System.out.println(bookList);
-			//printMenu(bookList);
+
+			printMenu(bookList);
 			printOptions();
 			inputNum = Validator.getInt(scan, "Please choose!\n", 1, 7);
 
