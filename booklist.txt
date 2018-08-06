@@ -1,13 +1,16 @@
-Twilight,Meyer,Stephenie,true,N/A
-Vampire Academy,Richelle,Mead,true,N/A
-The Last Song,Sparks,Nicholas,true,N/A
-The Great Gatsby,Fitzgerald,F. Scott,true,N/A
+Changes,Butcher,Jim,false,2018-08-20
+Cloud Atlas,Mitchell,David,true,N/A
+Dungeon Born,Krout,Dakota,true,N/A
+Forging Hephaestus,Hayes,Drew,true,N/A
+Lirael,Nix,Garth,true,N/A
+Nice Dragons Finish Last,Aaron,Rachael,true,N/A
 The Amazing Adventures of Kavalier & Clay,Chabon,Michael,true,N/A
 The Fortress of Solitude,Lethem,Jonathan,true,N/A
-Cloud Atlas,Mitchell,David,true,N/A
+The Great Gatsby,Fitzgerald,F. Scott,true,N/A
+The Last Song,Sparks,Nicholas,true,N/A
 The Remains of the Day,Ishiguro,Kazuo,true,N/A
-Lirael,Nix,Garth,true,N/A
-Changes,Butcher,Jim,true,N/A
-Forging Hephaestus,Hayes,Drew,true,N/A
-Dungeon Born,Krout,Dakota,true,N/A
-Nice Dragons Finish Last,Aaron,Rachael,true,N/A
+Twilight,Meyer,Stephenie,true,N/A
+Vampire Academy,Richelle,Mead,true,N/A
+Turn boat,butcher,jim,true,N/A
+Turn coat,butcher,jim,true,N/A
+Java for beginners,smith,john,true,N/A
