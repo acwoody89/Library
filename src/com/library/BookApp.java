@@ -12,16 +12,11 @@ import java.util.Scanner;
 public class BookApp {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner scan = new Scanner(System.in);
 		ArrayList<Book> bookList = new ArrayList<>();
 		bookList = BookHelper.readFromFile("booklist.txt");
 		int inputNum = 0;
 		sortByTitle(bookList);
-		// for (Book b : bookList) {
-		// System.out.print(b.getTitle() + " ");
-		// System.out.println(b.getAuthorLast());
-		// }
 
 		do {
 			printMenu(bookList);
@@ -96,13 +91,13 @@ public class BookApp {
 
 	public static int selectBook(ArrayList<Book> sortList, Scanner scan) {
 		int inputNum = Validator.getInt(scan,
-				"What book would you like to select? \n " + "select by option number or Title", 1, sortList.size());
+				"What book would you like to select? \n" + "Select by option number.", 1, sortList.size());
 		return inputNum;
 	}
 
 	public static void checkOutBook(ArrayList<Book> sortList, int input, Scanner scan) {
-		System.out.println("Would you like to checkout this book?");
-		int checkoutBook = Validator.getInt(scan, "(1) Yes \n (2) No", 1, 2);
+		System.out.println("Would you like to check out this book?");
+		int checkoutBook = Validator.getInt(scan, "(1) Yes \n(2) No", 1, 2);
 
 		if (checkoutBook == 1 && (sortList.get(input - 1).isStatus() == true)) {
 
@@ -121,7 +116,7 @@ public class BookApp {
 		} else if (checkoutBook == 2) {
 			System.out.println("Restarting search...");
 		} else {
-			System.out.println("That book is already checked out. Selc");
+			System.out.println("That book is already checked out.");
 		}
 	}
 
@@ -201,6 +196,11 @@ public class BookApp {
 
 	}
 
+	/**
+	 * 
+	 * @param titleSearch -- This method takes a user-input String, searches the title field
+	 * for matches, adds them to an ArrayList and prints it to the console.
+	 */
 	public static void titleSearch(ArrayList<Book> sortList, Scanner scan) {
 		int inputNum = 0;
 		do {
@@ -211,9 +211,7 @@ public class BookApp {
 			for (Book b : sortList) {
 				if ((b.getTitle().toLowerCase().contains(input))) {
 					searchBook.add(b);
-
 				}
-
 			}
 
 			if (searchBook.size() > 0) {
@@ -236,6 +234,11 @@ public class BookApp {
 		} while (inputNum == 1);
 	}
 
+	/**
+	 * 
+	 * @param authorSearch -- This method takes a user-input string, searches authorLast and
+	 * authorFirst fields for matches, adds them to an arrayList and prints to the console.
+	 */
 	public static void authorSearch(ArrayList<Book> sortList, Scanner scan) {
 		int inputNum = 0;
 		do {
@@ -270,6 +273,10 @@ public class BookApp {
 		} while (inputNum == 1);
 	}
 
+	/**
+	 * 
+	 * @param printOptions -- This method prints the main menu
+	 */
 	public static void printOptions() {
 		System.out.println("***********************************");
 		System.out.println("1 - Search by Author");
@@ -281,40 +288,37 @@ public class BookApp {
 		System.out.println("7 - Exit");
 	}
 
+	/**
+	 * 
+	 * @param sortByTitle -- This method sorts the books by title.
+	 */
 	public static void sortByTitle(ArrayList<Book> sortList) {
-		// import java.util.Collections;
 		Collections.sort(sortList, Comparator.comparing(Book::getTitle));
-
-		// for (Book b : sortList) {
-		// System.out.println(b.getTitle());
-		// }
 	}
 
+	/**
+	 * 
+	 * @param sortByLastName -- This method sorts the books by author's last name.
+	 */
 	public static void sortByLastName(ArrayList<Book> sortList) {
-		// import java.util.Collections;
 		Collections.sort(sortList, Comparator.comparing(Book::getAuthorLast));
-
-		// for (Book b : sortList) {
-		// System.out.println(b.getTitle());
-		// }
 	}
 
+	/**
+	 * 
+	 * @param sortByStatus -- This method sorts the books by On Shelf or Checked Out
+	 */
 	public static void sortByStatus(ArrayList<Book> sortList) {
-		// import java.util.Collections;
 		Collections.sort(sortList, Comparator.comparing(Book::isStatus));
-
-		// for (Book b : sortList) {
-		// System.out.println(b.getTitle());
-		// }
 	}
 
+	/**
+	 * 
+	 * @param sortByDueDate -- This method sorts the books by due date.
+	 */
 	public static void sortByDueDate(ArrayList<Book> sortList) {
-		// import java.util.Collections;
 		Collections.sort(sortList, Comparator.comparing(Book::getDueDate));
 
-		// for (Book b : sortList) {
-		// System.out.println(b.getTitle());
-		// }
 	}
 
 }
