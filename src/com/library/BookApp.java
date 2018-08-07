@@ -120,10 +120,12 @@ public class BookApp {
 
 						System.out.println("You have returned " + sortList.get(i).getTitle());
 						returnBook = 2;
+						
 					}
 				}
 			}
 		}
+		BookHelper.writeToFiles(bookList);
 	}
 
 	/**

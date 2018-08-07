@@ -1,4 +1,4 @@
-Changes,Butcher,Jim,false,2018-08-20
+Changes,Butcher,Jim,true,N/A
 Cloud Atlas,Mitchell,David,true,N/A
 Dungeon Born,Krout,Dakota,true,N/A
 Forging Hephaestus,Hayes,Drew,true,N/A
