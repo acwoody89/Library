@@ -95,37 +95,42 @@ public class BookApp {
 	 */
 	public static void returnBook(ArrayList<Book> bookList, Scanner scan) {
 		ArrayList<Book> sortList = new ArrayList<>();
-
 		int returnBook = 1;
 		returnBook = Validator.getInt(scan, "Would you like to return a book?\n(1) yes\n(2) no\n", 1, 2);
-
-		while (returnBook == 1) {
-			for (Book b : bookList) {
-				if (b.isStatus() == false) {
-					sortList.add(b);
-				}
-			}
-			printMenu(sortList);
-
-			int userInput = Validator.getInt(scan, "Please select a book to return.", 1, sortList.size());
-			
-			/**
-			 * Returning book as "On shelf".
-			 */
-			for (int i = 0; i < sortList.size(); i++) {
-				if (i == (userInput - 1)) {
-					if (sortList.get(i).isStatus() == false) {
-						sortList.get(i).setStatus(true);
-						sortList.get(i).setDueDate("N/A");
-
-						System.out.println("You have returned " + sortList.get(i).getTitle());
-						returnBook = 2;
-						
-					}
-				}
+		for (Book b : bookList) {
+			if (b.isStatus() == false) {
+				sortList.add(b);
 			}
 		}
-		BookHelper.writeToFiles(bookList);
+		while (returnBook == 1) {
+			for (Book b : bookList) {
+				if (b.isStatus() == true) {
+					sortList.remove(b);
+				}
+			}
+			if (sortList.size() > 0) {
+				printMenu(sortList);
+
+				int userInput = Validator.getInt(scan, "Please select a book to return.", 1, sortList.size());
+
+				/**
+				 * Returning book as "On shelf".
+				 */
+				for (int i = 0; i < sortList.size(); i++) {
+					if (i == (userInput - 1) && sortList.get(i).isStatus() == false) {
+						sortList.get(i).setStatus(true);
+						sortList.get(i).setDueDate("N/A");
+						System.out.println("You have returned " + sortList.get(i).getTitle());
+
+					}
+				}
+				returnBook = Validator.getInt(scan, "Would you like to return a book?\n(1) yes\n(2) no\n", 1, 2);
+			} else {
+				System.out.println("There are no books to return.");
+				returnBook = 2;
+			}
+			 BookHelper.writeToFiles(bookList);
+		}
 	}
 
 	/**
@@ -171,6 +176,7 @@ public class BookApp {
 		} else {
 			System.out.println("That book is already checked out.");
 		}
+		BookHelper.writeToFiles(sortList);
 	}
 
 	/**
