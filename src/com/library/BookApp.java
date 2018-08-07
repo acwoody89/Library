@@ -47,6 +47,7 @@ public class BookApp {
 			} else if (inputNum == 6) {
 				addBook(scan, bookList);
 			} else if (inputNum == 7) {
+				BookHelper.writeToFiles(bookList);
 				System.out.println("You are leaving the lie-brary of Three Laptops and A Mouse");
 			}
 		} while (!(inputNum == 7));
@@ -118,6 +119,7 @@ public class BookApp {
 						sortList.get(i).setDueDate("N/A");
 
 						System.out.println("You have returned " + sortList.get(i).getTitle());
+						returnBook = 2;
 					}
 				}
 			}
