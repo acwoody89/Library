@@ -344,7 +344,7 @@ public class BookApp {
 							b.getDueDate());
 					count++;
 				}
-				checkOutBook(searchBook, selectBook(sortList, scan), scan);
+				checkOutBook(searchBook, selectBook(searchBook, scan), scan);
 			} else {
 				System.out.println("Sorry, search conditions not found! Try Again!");
 			}
