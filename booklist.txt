@@ -11,6 +11,3 @@ The Last Song,Sparks,Nicholas,true,N/A
 The Remains of the Day,Ishiguro,Kazuo,true,N/A
 Twilight,Meyer,Stephenie,true,N/A
 Vampire Academy,Richelle,Mead,true,N/A
-Turn boat,butcher,jim,true,N/A
-Turn coat,butcher,jim,true,N/A
-Java for beginners,smith,john,true,N/A
